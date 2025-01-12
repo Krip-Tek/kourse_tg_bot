@@ -1,6 +1,7 @@
 import asyncio
 from aiogram import Dispatcher, Bot, types, F
 from aiogram.filters import Command
+from settings import TG_TOKEN
 
 dp = Dispatcher()
 
@@ -75,8 +76,7 @@ async def excelent_handler(message: types.Message):
 
 
 async def main():
-    token = '6951736030:AAF0fxyFWu9FyoI5pbMYXOxzeNtpnRHgLhg'
-    bot = Bot(token)
+    bot = Bot(TG_TOKEN)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
