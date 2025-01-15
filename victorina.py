@@ -15,6 +15,14 @@ async def start_command(message: types.Message)-> None:
     await message.answer(f'Привет, {message.from_user.first_name}\nЭто веселая викторина.\n\n'
                          f'Выбери одну тему из предложенных.', reply_markup=keyboard)
 
+@dp.callback_query(F.data == 'menu')
+async def menu_callback(callback: types.CallbackQuery):
+    kb = [
+        [types.InlineKeyboardButton(text='Меню', callback_data='menu')]
+    ]
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
+
+    await callback.message.edit_text(f'Выберите одну из тем',reply_markup=keyboard)
 
 
 async def main():
