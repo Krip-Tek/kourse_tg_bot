@@ -9,20 +9,40 @@ dp = Dispatcher()
 async def start_command(message: types.Message)-> None:
 
     kb = [
-        [types.InlineKeyboardButton(text='Меню', callback_data='menu')]
+        [types.InlineKeyboardButton(text='Темы', callback_data='themes')]
     ]
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
-    await message.answer(f'Привет, {message.from_user.first_name}\nЭто веселая викторина.\n\n'
-                         f'Выбери одну тему из предложенных.', reply_markup=keyboard)
+    await message.answer(f'Привет, {message.from_user.first_name}\nЭто веселая викторина.', reply_markup=keyboard)
 
-@dp.callback_query(F.data == 'menu')
-async def menu_callback(callback: types.CallbackQuery):
+
+@dp.message(Command('help'))
+async def help_command(message:types.Message) -> None:
+
     kb = [
-        [types.InlineKeyboardButton(text='Меню', callback_data='menu')]
+        [types.InlineKeyboardButton(text='Назад', callback_data='start')]
+    ]
+
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
+    await message.edit_text(f'Данная викторина содержит 4 темы по 10 вопросов в каждой.\n'
+                            f'Вопросы каждый раз подбираются случайно.\n'
+                            f'Вам будет предложено по 4 варианта ответа,\n'
+                            f'Если ваш ответ верный, то вы получаете один бал.\n'
+                            f'В конце викторины будет сообщение о количестве правильных ответов.\n\n'
+                            f'Соревнуйтесь с друзьями и набирайте больше очков. Удачи!', reply_markup=keyboard)
+
+@dp.callback_query(F.data == 'themes')
+async def menu_callback(callback: types.CallbackQuery) -> None:
+    kb = [
+        [types.InlineKeyboardButton(text='Горы', callback_data='mountain'),
+         types.InlineKeyboardButton(text='Города', callback_data='city')],
+        [types.InlineKeyboardButton(text='Страны', callback_data='country'),
+         types.InlineKeyboardButton(text='Реки', callback_data='river')]
     ]
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
 
     await callback.message.edit_text(f'Выберите одну из тем',reply_markup=keyboard)
+
+
 
 
 async def main():
