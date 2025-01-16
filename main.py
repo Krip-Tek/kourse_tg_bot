@@ -40,7 +40,7 @@ async def site_about_callback(callback: types.CallbackQuery):
         types.InlineKeyboardButton(text='Назад', callback_data='menu')
     ]]
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
-    await callback.message.edit_text(f'Мы NeoCorp. Наш сайт занимается предоставлением доступа к приложениям для '
+    await callback.message.edit_text(f'Мы NeoCorp. Наш сайт занимается предоставлением доступа к приложениям для'
                          f'создания своего персонального помощника.', reply_markup=keyboard)
 
 
@@ -69,6 +69,7 @@ async def fitback_callback(callback: types.CallbackQuery):
     ]]
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
     await callback.message.edit_text(f'По всем вопросам обращаться к "Библии" нашего сайта.', reply_markup=keyboard)
+
 
 @dp.message(F.text == 'Отлично')
 async def excelent_handler(message: types.Message):
