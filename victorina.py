@@ -1,11 +1,11 @@
 import asyncio
-from aiogram import Dispatcher, Bot, types, Router, F
+from aiogram import Dispatcher, Bot, types, F
 from aiogram.filters import Command
 from settings import TG_TOKEN
 
 dp = Dispatcher()
 
-# start_router = Router()
+
 
 @dp.message(Command('start'))
 async def start_command(message: types.Message)-> None:
@@ -64,8 +64,14 @@ async def theme_check_callback(callback: types.CallbackQuery) -> None:
     ]
 
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=kb)
-
-    await callback.message.edit_text(f'Вы выбрали тему {callback.data}', reply_markup=keyboard)
+    if callback.data == 'mountain':
+        await callback.message.edit_text(f'Вы выбрали тему Горы', reply_markup=keyboard)
+    elif callback.data == 'city':
+        await callback.message.edit_text(f'Вы выбрали тему Города', reply_markup=keyboard)
+    elif callback.data == 'country':
+        await callback.message.edit_text(f'Вы выбрали тему Страны', reply_markup=keyboard)
+    elif callback.data == 'river':
+        await callback.message.edit_text(f'Вы выбрали тему Реки', reply_markup=keyboard)
 
 
 async def main():
