@@ -1,4 +1,6 @@
 import asyncio
+import json
+
 from aiogram import Dispatcher, Bot, types, F
 from aiogram.filters import Command
 from settings import TG_TOKEN
@@ -72,6 +74,12 @@ async def theme_check_callback(callback: types.CallbackQuery) -> None:
         await callback.message.edit_text(f'Вы выбрали тему Страны', reply_markup=keyboard)
     elif callback.data == 'river':
         await callback.message.edit_text(f'Вы выбрали тему Реки', reply_markup=keyboard)
+
+data = {
+
+}
+with open('questions.json', 'a+', encoding='utf-8') as file:
+    json.dump(data, file, ensure_ascii=False, indent=4)
 
 
 async def main():

@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://numbersapi.com/43'
+url = 'https://opentdb.com/api.php?amount=10'
 
 response = requests.get(url)
 
